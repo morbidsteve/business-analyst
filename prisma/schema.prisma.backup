@@ -1,0 +1,241 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["jsonProtocol"]
+}
+
+model Program {
+  id                String    @id @default(uuid())
+  name              String
+  description       String?
+  startDate         DateTime
+  endDate           DateTime?
+  budget            Float
+  financialData     FinancialData[]
+  personnel         Personnel[]
+  projects          Project[]
+  expenses          Expense[]
+  laborCosts        LaborCost[]
+  facilitiesCosts   FacilitiesCost[]
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  historicalChanges ProgramHistoricalChange[]
+  deletedAt         DateTime?
+}
+
+model FinancialData {
+  id                String    @id @default(uuid())
+  program           Program   @relation(fields: [programId], references: [id])
+  programId         String
+  type              FinancialDataType
+  amount            Float
+  date              DateTime
+  description       String?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  historicalChanges FinancialDataHistoricalChange[]
+  deletedAt         DateTime?
+}
+
+model Personnel {
+  id                String    @id @default(uuid())
+  program           Program   @relation(fields: [programId], references: [id])
+  programId         String
+  employee          Employee  @relation(fields: [employeeId], references: [id])
+  employeeId        String
+  startDate         DateTime
+  endDate           DateTime?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  deletedAt         DateTime?
+  historicalChanges PersonnelHistoricalChange[]
+  laborCosts        LaborCost[]
+}
+
+model Project {
+  id                String    @id @default(uuid())
+  program           Program   @relation(fields: [programId], references: [id])
+  programId         String
+  name              String
+  description       String?
+  startDate         DateTime
+  endDate           DateTime?
+  budget            Float
+  status            ProjectStatus
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  historicalChanges ProjectHistoricalChange[]
+  deletedAt         DateTime?
+}
+
+model Expense {
+  id                String    @id @default(uuid())
+  program           Program   @relation(fields: [programId], references: [id])
+  programId         String
+  amount            Float
+  date              DateTime
+  description       String
+  category          ExpenseCategory
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  historicalChanges ExpenseHistoricalChange[]
+  deletedAt         DateTime?
+}
+
+model LaborCost {
+  id                String    @id @default(uuid())
+  program           Program   @relation(fields: [programId], references: [id])
+  programId         String
+  personnel         Personnel @relation(fields: [personnelId], references: [id])
+  personnelId       String
+  employee          Employee  @relation(fields: [employeeId], references: [id])
+  employeeId        String
+  hours             Float
+  date              DateTime
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  deletedAt         DateTime?
+  historicalChanges LaborCostHistoricalChange[]
+}
+
+model FacilitiesCost {
+  id                String    @id @default(uuid())
+  program           Program   @relation(fields: [programId], references: [id])
+  programId         String
+  amount            Float
+  date              DateTime
+  description       String
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  historicalChanges FacilitiesCostHistoricalChange[]
+  deletedAt         DateTime?
+}
+
+// Historical change models
+model ProgramHistoricalChange {
+  id        String   @id @default(uuid())
+  program   Program  @relation(fields: [programId], references: [id])
+  programId String
+  field     String
+  oldValue  String
+  newValue  String
+  changedAt DateTime @default(now())
+}
+
+model FinancialDataHistoricalChange {
+  id              String        @id @default(uuid())
+  financialData   FinancialData @relation(fields: [financialDataId], references: [id])
+  financialDataId String
+  field           String
+  oldValue        String
+  newValue        String
+  changedAt       DateTime      @default(now())
+}
+
+model PersonnelHistoricalChange {
+  id          String    @id @default(uuid())
+  personnel   Personnel @relation(fields: [personnelId], references: [id])
+  personnelId String
+  field       String
+  oldValue    String
+  newValue    String
+  changedAt   DateTime  @default(now())
+}
+
+model ProjectHistoricalChange {
+  id        String   @id @default(uuid())
+  project   Project  @relation(fields: [projectId], references: [id])
+  projectId String
+  field     String
+  oldValue  String
+  newValue  String
+  changedAt DateTime @default(now())
+}
+
+model ExpenseHistoricalChange {
+  id        String   @id @default(uuid())
+  expense   Expense  @relation(fields: [expenseId], references: [id])
+  expenseId String
+  field     String
+  oldValue  String
+  newValue  String
+  changedAt DateTime @default(now())
+}
+
+model LaborCostHistoricalChange {
+  id          String    @id @default(uuid())
+  laborCost   LaborCost @relation(fields: [laborCostId], references: [id])
+  laborCostId String
+  field       String
+  oldValue    String
+  newValue    String
+  changedAt   DateTime  @default(now())
+}
+
+model FacilitiesCostHistoricalChange {
+  id               String         @id @default(uuid())
+  facilitiesCost   FacilitiesCost @relation(fields: [facilitiesCostId], references: [id])
+  facilitiesCostId String
+  field            String
+  oldValue         String
+  newValue         String
+  changedAt        DateTime       @default(now())
+}
+
+model Employee {
+  id                String    @id @default(uuid())
+  name              String
+  email             String    @unique
+  position          String
+  department        String
+  startDate         DateTime
+  endDate           DateTime?
+  hourlyRate        Float
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  deletedAt         DateTime?
+  personnel         Personnel[]
+  laborCosts        LaborCost[]
+  historicalChanges EmployeeHistoricalChange[]
+}
+
+model EmployeeHistoricalChange {
+  id         String   @id @default(uuid())
+  employee   Employee @relation(fields: [employeeId], references: [id])
+  employeeId String
+  field      String
+  oldValue   String
+  newValue   String
+  changedAt  DateTime @default(now())
+}
+
+enum FinancialDataType {
+  REVENUE
+  EXPENSE
+  BUDGET_ALLOCATION
+  INVESTMENT
+}
+
+enum ProjectStatus {
+  PLANNING
+  IN_PROGRESS
+  COMPLETED
+  ON_HOLD
+  CANCELLED
+}
+
+enum ExpenseCategory {
+  TRAVEL
+  EQUIPMENT
+  SUPPLIES
+  SERVICES
+  MISCELLANEOUS
+}
+
