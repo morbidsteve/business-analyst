@@ -80,7 +80,7 @@ Program Analyst is a comprehensive web-based application designed to streamline 
 
 3. Set up the database:
    - Create a PostgreSQL database
-   - Copy the \`.env.example\` file to \`.env\` and update the \`DATABASE_URL\` with your database connection string
+   - Copy the `.env.example` file to `.env` and update the `DATABASE_URL` with your database connection string
 
 4. Run database migrations:
    \`\`\`
@@ -97,7 +97,7 @@ Program Analyst is a comprehensive web-based application designed to streamline 
    npm run dev
    \`\`\`
 
-7. Open your browser and navigate to \`http://localhost:3000\`
+7. Open your browser and navigate to `http://localhost:3000`
 
 ## Usage Guidelines
 
@@ -147,3 +147,4 @@ If you encounter any issues or have questions about using Program Analyst, pleas
 ---
 
 Thank you for using Program Analyst! We hope this tool helps streamline your program management processes and provides valuable insights into your projects and financial data.
+
