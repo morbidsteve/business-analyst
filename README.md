@@ -4,46 +4,54 @@
 
 Program Analyst is a comprehensive web-based application designed to streamline program management, financial tracking, and resource allocation for organizations managing multiple programs and projects. This tool provides a centralized platform for program managers, financial analysts, and team leaders to efficiently monitor budgets, track expenses, manage personnel, and analyze program performance.
 
+![Dashboard](./images/dashboard.png)
+
 ## Key Features
 
 1. **Program Management**
-    - Create and manage multiple programs
-    - Track program budgets, start dates, and end dates
-    - Monitor program status and progress
+   - Create and manage multiple programs
+   - Track program budgets, start dates, and end dates
+   - Monitor program status and progress
+
+   ![Programs](./images/programs.png)
 
 2. **Project Tracking**
-    - Create and assign projects within programs
-    - Track project budgets, timelines, and statuses
-    - Customizable project status options
+   - Create and assign projects within programs
+   - Track project budgets, timelines, and statuses
+   - Customizable project status options
+
+   ![Program Details](./images/program%20details.png)
 
 3. **Financial Management**
-    - Real-time financial data tracking
-    - Budget allocation and expense monitoring
-    - Revenue and cost analysis
-    - Detailed financial reporting
+   - Real-time financial data tracking
+   - Budget allocation and expense monitoring
+   - Revenue and cost analysis
+   - Detailed financial reporting
+
+   ![Financials](./images/financials.png)
 
 4. **Resource Management**
-    - Employee database with roles and hourly rates
-    - Assign employees to programs and projects
-    - Track labor costs and work hours
+   - Employee database with roles and hourly rates
+   - Assign employees to programs and projects
+   - Track labor costs and work hours
 
 5. **Expense Tracking**
-    - Categorize and monitor various types of expenses
-    - Track facilities costs
-    - Generate expense reports
+   - Categorize and monitor various types of expenses
+   - Track facilities costs
+   - Generate expense reports
 
 6. **Dashboard and Analytics**
-    - Overview of program and project statuses
-    - Financial summaries and visualizations
-    - Performance metrics and KPIs
+   - Overview of program and project statuses
+   - Financial summaries and visualizations
+   - Performance metrics and KPIs
 
 7. **Calendar Integration**
-    - Program and project timeline visualization
-    - Event scheduling and management
+   - Program and project timeline visualization
+   - Event scheduling and management
 
 8. **Historical Data and Audit Trails**
-    - Track changes to programs, projects, and employee data
-    - Maintain historical records for analysis and auditing
+   - Track changes to programs, projects, and employee data
+   - Maintain historical records for analysis and auditing
 
 ## Technologies Used
 
@@ -71,8 +79,8 @@ Program Analyst is a comprehensive web-based application designed to streamline 
    \`\`\`
 
 3. Set up the database:
-    - Create a PostgreSQL database
-    - Copy the \`.env.example\` file to \`.env\` and update the \`DATABASE_URL\` with your database connection string
+   - Create a PostgreSQL database
+   - Copy the \`.env.example\` file to \`.env\` and update the \`DATABASE_URL\` with your database connection string
 
 4. Run database migrations:
    \`\`\`
@@ -96,29 +104,33 @@ Program Analyst is a comprehensive web-based application designed to streamline 
 1. **Dashboard**: The main dashboard provides an overview of all programs, their financial summaries, and project statuses.
 
 2. **Programs**:
-    - View all programs on the Programs page
-    - Click on a program to view its details
-    - Use the "Add New Program" button to create a new program
+   - View all programs on the Programs page
+   - Click on a program to view its details
+   - Use the "Add New Program" button to create a new program
 
 3. **Projects**:
-    - Projects are managed within their respective programs
-    - View and add projects from the program details page
+   - Projects are managed within their respective programs
+   - View and add projects from the program details page
 
 4. **Employees**:
-    - Manage employees from the Employees page
-    - Add new employees and assign them to programs
+   - Manage employees from the Employees page
+   - Add new employees and assign them to programs
 
 5. **Financial Management**:
-    - Track financial data for each program
-    - Add expenses, labor costs, and facilities costs from the program management page
+   - Track financial data for each program
+   - Add expenses, labor costs, and facilities costs from the program management page
+
+   ![Manage Program](./images/manage%20program.png)
 
 6. **Calendar**:
-    - Use the calendar to visualize program and project timelines
-    - Add and manage events directly from the calendar interface
+   - Use the calendar to visualize program and project timelines
+   - Add and manage events directly from the calendar interface
 
 7. **Settings**:
-    - Customize project statuses
-    - Manage database operations (for development purposes)
+   - Customize project statuses
+   - Manage database operations (for development purposes)
+
+   ![Settings](./images/settings.png)
 
 ## Contributing
 
@@ -135,4 +147,3 @@ If you encounter any issues or have questions about using Program Analyst, pleas
 ---
 
 Thank you for using Program Analyst! We hope this tool helps streamline your program management processes and provides valuable insights into your projects and financial data.
-
