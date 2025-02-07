@@ -68,34 +68,34 @@ Program Analyst is a comprehensive web-based application designed to streamline 
 ## Setup Instructions
 
 1. Clone the repository:
-   \`\`\`
+   ```
    git clone https://github.com/your-username/program-analyst.git
    cd program-analyst
-   \`\`\`
+   ```
 
 2. Install dependencies:
-   \`\`\`
+   ```
    npm install
-   \`\`\`
+   ```
 
 3. Set up the database:
    - Create a PostgreSQL database
    - Copy the `.env.example` file to `.env` and update the `DATABASE_URL` with your database connection string
 
 4. Run database migrations:
-   \`\`\`
+   ```
    npx prisma migrate dev
-   \`\`\`
+   ```
 
 5. Seed the database (optional):
-   \`\`\`
+   ```
    npm run seed
-   \`\`\`
+   ```
 
 6. Start the development server:
-   \`\`\`
+   ```
    npm run dev
-   \`\`\`
+   ```
 
 7. Open your browser and navigate to `http://localhost:3000`
 
