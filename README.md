@@ -1,36 +1,138 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Program Analyst
 
-## Getting Started
+## Project Overview
 
-First, run the development server:
+Program Analyst is a comprehensive web-based application designed to streamline program management, financial tracking, and resource allocation for organizations managing multiple programs and projects. This tool provides a centralized platform for program managers, financial analysts, and team leaders to efficiently monitor budgets, track expenses, manage personnel, and analyze program performance.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Key Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. **Program Management**
+    - Create and manage multiple programs
+    - Track program budgets, start dates, and end dates
+    - Monitor program status and progress
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. **Project Tracking**
+    - Create and assign projects within programs
+    - Track project budgets, timelines, and statuses
+    - Customizable project status options
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. **Financial Management**
+    - Real-time financial data tracking
+    - Budget allocation and expense monitoring
+    - Revenue and cost analysis
+    - Detailed financial reporting
 
-## Learn More
+4. **Resource Management**
+    - Employee database with roles and hourly rates
+    - Assign employees to programs and projects
+    - Track labor costs and work hours
 
-To learn more about Next.js, take a look at the following resources:
+5. **Expense Tracking**
+    - Categorize and monitor various types of expenses
+    - Track facilities costs
+    - Generate expense reports
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+6. **Dashboard and Analytics**
+    - Overview of program and project statuses
+    - Financial summaries and visualizations
+    - Performance metrics and KPIs
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+7. **Calendar Integration**
+    - Program and project timeline visualization
+    - Event scheduling and management
 
-## Deploy on Vercel
+8. **Historical Data and Audit Trails**
+    - Track changes to programs, projects, and employee data
+    - Maintain historical records for analysis and auditing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Technologies Used
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Frontend**: React, Next.js, Tailwind CSS
+- **Backend**: Node.js, Express
+- **Database**: PostgreSQL
+- **ORM**: Prisma
+- **Authentication**: (To be implemented)
+- **State Management**: React Hooks
+- **UI Components**: shadcn/ui
+- **Calendar**: react-big-calendar
+- **Form Handling**: react-hook-form, zod
+
+## Setup Instructions
+
+1. Clone the repository:
+   \`\`\`
+   git clone https://github.com/your-username/program-analyst.git
+   cd program-analyst
+   \`\`\`
+
+2. Install dependencies:
+   \`\`\`
+   npm install
+   \`\`\`
+
+3. Set up the database:
+    - Create a PostgreSQL database
+    - Copy the \`.env.example\` file to \`.env\` and update the \`DATABASE_URL\` with your database connection string
+
+4. Run database migrations:
+   \`\`\`
+   npx prisma migrate dev
+   \`\`\`
+
+5. Seed the database (optional):
+   \`\`\`
+   npm run seed
+   \`\`\`
+
+6. Start the development server:
+   \`\`\`
+   npm run dev
+   \`\`\`
+
+7. Open your browser and navigate to \`http://localhost:3000\`
+
+## Usage Guidelines
+
+1. **Dashboard**: The main dashboard provides an overview of all programs, their financial summaries, and project statuses.
+
+2. **Programs**:
+    - View all programs on the Programs page
+    - Click on a program to view its details
+    - Use the "Add New Program" button to create a new program
+
+3. **Projects**:
+    - Projects are managed within their respective programs
+    - View and add projects from the program details page
+
+4. **Employees**:
+    - Manage employees from the Employees page
+    - Add new employees and assign them to programs
+
+5. **Financial Management**:
+    - Track financial data for each program
+    - Add expenses, labor costs, and facilities costs from the program management page
+
+6. **Calendar**:
+    - Use the calendar to visualize program and project timelines
+    - Add and manage events directly from the calendar interface
+
+7. **Settings**:
+    - Customize project statuses
+    - Manage database operations (for development purposes)
+
+## Contributing
+
+We welcome contributions to the Program Analyst project. Please read our CONTRIBUTING.md file (to be created) for details on our code of conduct and the process for submitting pull requests.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details.
+
+## Support
+
+If you encounter any issues or have questions about using Program Analyst, please file an issue on the GitHub repository.
+
+---
+
+Thank you for using Program Analyst! We hope this tool helps streamline your program management processes and provides valuable insights into your projects and financial data.
+
