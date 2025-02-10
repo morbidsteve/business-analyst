@@ -1,6 +1,21 @@
 import { NextResponse } from "next/server"
 import prisma from "@/lib/prisma"
 
+export async function GET() {
+    try {
+        const employees = await prisma.employee.findMany({
+            select: {
+                id: true,
+                name: true,
+            },
+        })
+        return NextResponse.json(employees)
+    } catch (error) {
+        console.error("Failed to fetch employees:", error)
+        return NextResponse.json({ error: "Failed to fetch employees" }, { status: 500 })
+    }
+}
+
 export async function POST(request: Request) {
     try {
         const data = await request.json()
@@ -22,12 +37,6 @@ export async function POST(request: Request) {
                 employeeId: employee.id,
                 role: data.position,
                 startDate: new Date(data.startDate),
-                contractId: data.isPlanning ? null : data.contractId,
-                laborCategoryId: data.isPlanning ? null : data.laborCategoryId,
-                assignmentStart: new Date(data.startDate),
-                billableRate: data.hourlyRate * 2, // Example: billable rate is twice the hourly rate
-                clearanceLevel: "None", // Default value, you may want to add this to the form
-                currentStatus: true,
             },
         })
 
@@ -37,6 +46,4 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: "Failed to create employee" }, { status: 500 })
     }
 }
-
-// ... (keep the existing GET method)
 

@@ -307,6 +307,7 @@ export async function seedDatabase() {
                                 securityClearanceReq: ["Secret", "Top Secret", "Confidential"][Math.floor(Math.random() * 3)],
                                 performanceLocation: ["Washington D.C.", "Houston, TX", "Palo Alto, CA"][Math.floor(Math.random() * 3)],
                                 naicsCode: ["541330", "541715", "541990"][Math.floor(Math.random() * 3)],
+                                isClassified: Math.random() < 0.3,
                                 smallBusinessGoalPct: Math.floor(Math.random() * 30) + 10,
                             },
                         })

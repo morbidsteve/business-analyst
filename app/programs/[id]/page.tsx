@@ -1,22 +1,12 @@
 import { notFound } from "next/navigation"
-import Link from "next/link"
 import Layout from "@/components/Layout"
 import prisma from "@/lib/prisma"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Button } from "@/components/ui/button"
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { ChevronDown } from "lucide-react"
 import { FinancialDataManagement } from "@/components/FinancialDataManagement"
 import { ProgramAnalyticsDashboard } from "@/components/ProgramAnalyticsDashboard"
+import { EmployeeManagement } from "@/components/EmployeeManagement"
 
 async function getProgram(id: string) {
     const program = await prisma.program.findUnique({
@@ -49,29 +39,7 @@ export default async function ProgramDetails({ params }: { params: { id: string 
         <Layout title={`${program.name} | Program Analyst`}>
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-3xl font-bold">{program.name}</h1>
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="outline">
-                            Manage Program <ChevronDown className="ml-2 h-4 w-4" />
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                        <DropdownMenuLabel>Program Management</DropdownMenuLabel>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem asChild>
-                            <Link href={`/programs/${program.id}/manage`}>Full Management Dashboard</Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem asChild>
-                            <Link href={`/programs/${program.id}/employees/new`}>Add New Employee</Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem asChild>
-                            <Link href={`/programs/${program.id}/projects/new`}>Add New Project</Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem asChild>
-                            <Link href={`/programs/${program.id}/contracts/new`}>Add New Contract</Link>
-                        </DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
+                <EmployeeManagement programId={program.id} />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Card>
