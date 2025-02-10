@@ -8,6 +8,8 @@ import { AddWorkHoursForm } from "./AddWorkHoursForm"
 import { AddLaborCostForm } from "./AddLaborCostForm"
 import { AddFacilitiesCostForm } from "./AddFacilitiesCostForm"
 import { AssignEmployeeToProgram } from "./AssignEmployeeToProgram"
+import { ContractManagement } from "./ContractManagement"
+import { FinancialDataManagement } from "./FinancialDataManagement"
 
 type Program = {
     id: string
@@ -17,7 +19,7 @@ type Program = {
     startDate: Date
     endDate: Date | null
     projects: { id: string; name: string; status: string }[]
-    personnel: { id: string; name: string; role: string }[]
+    personnel: { id: string; employee: { name: string }; role: string }[]
 }
 
 type ProgramManagementProps = {
@@ -35,13 +37,15 @@ export function ProgramManagement({ program }: ProgramManagementProps) {
             </CardHeader>
             <CardContent>
                 <Tabs value={activeTab} onValueChange={setActiveTab}>
-                    <TabsList className="grid w-full grid-cols-6">
+                    <TabsList className="grid w-full grid-cols-8">
                         <TabsTrigger value="overview">Overview</TabsTrigger>
+                        <TabsTrigger value="financials">Financials</TabsTrigger>
                         <TabsTrigger value="invoices">Invoices</TabsTrigger>
                         <TabsTrigger value="workHours">Work Hours</TabsTrigger>
                         <TabsTrigger value="laborCosts">Labor Costs</TabsTrigger>
                         <TabsTrigger value="facilitiesCosts">Facilities Costs</TabsTrigger>
                         <TabsTrigger value="assignEmployee">Assign Employee</TabsTrigger>
+                        <TabsTrigger value="contracts">Contracts</TabsTrigger>
                     </TabsList>
                     <TabsContent value="overview">
                         <Card>
@@ -74,6 +78,9 @@ export function ProgramManagement({ program }: ProgramManagementProps) {
                             </CardContent>
                         </Card>
                     </TabsContent>
+                    <TabsContent value="financials">
+                        <FinancialDataManagement programId={program.id} />
+                    </TabsContent>
                     <TabsContent value="invoices">
                         <AddInvoiceForm programId={program.id} />
                     </TabsContent>
@@ -88,6 +95,9 @@ export function ProgramManagement({ program }: ProgramManagementProps) {
                     </TabsContent>
                     <TabsContent value="assignEmployee">
                         <AssignEmployeeToProgram programId={program.id} />
+                    </TabsContent>
+                    <TabsContent value="contracts">
+                        <ContractManagement programId={program.id} />
                     </TabsContent>
                 </Tabs>
             </CardContent>

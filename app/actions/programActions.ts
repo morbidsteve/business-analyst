@@ -9,6 +9,7 @@ export async function addProgram(data: {
     budget: number
     startDate: string
     endDate?: string
+    contractIds: string[]
 }) {
     try {
         const program = await prisma.program.create({
@@ -18,6 +19,9 @@ export async function addProgram(data: {
                 budget: data.budget,
                 startDate: new Date(data.startDate),
                 endDate: data.endDate ? new Date(data.endDate) : null,
+                contracts: {
+                    connect: data.contractIds.map((id) => ({ id })),
+                },
             },
         })
 
@@ -28,4 +32,3 @@ export async function addProgram(data: {
         return { success: false, error: "Failed to add program" }
     }
 }
-

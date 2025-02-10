@@ -8,7 +8,11 @@ async function getProgram(id: string) {
         where: { id },
         include: {
             projects: true,
-            personnel: true,
+            personnel: {
+                include: {
+                    employee: true,
+                },
+            },
             financialData: true,
             expenses: true,
             laborCosts: true,
@@ -33,3 +37,4 @@ export default async function ManageProgram({ params }: { params: { id: string }
         </Layout>
     )
 }
+

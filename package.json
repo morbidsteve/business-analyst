@@ -9,7 +9,8 @@
     "lint": "next lint",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
-    "prisma:studio": "prisma studio"
+    "prisma:studio": "prisma studio",
+    "update-prisma": "./scripts/update-prisma.sh"
   },
   "dependencies": {
     "@faker-js/faker": "^9.4.0",
@@ -31,6 +32,7 @@
     "react-big-calendar": "^1.17.1",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.44.3",
+    "recharts": "^2.15.1",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.6",
     "zod": "^3.21.4"

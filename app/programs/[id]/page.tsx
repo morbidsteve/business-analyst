@@ -6,20 +6,26 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { ChevronDown } from "lucide-react"
+import { FinancialDataManagement } from "@/components/FinancialDataManagement"
+import { ProgramAnalyticsDashboard } from "@/components/ProgramAnalyticsDashboard"
 
 async function getProgram(id: string) {
     const program = await prisma.program.findUnique({
         where: { id },
         include: {
-            projects: {
-                select: { id: true, name: true, status: true },
-            },
+            projects: true,
             personnel: {
-                select: {
-                    id: true,
-                    employee: {
-                        select: { name: true, position: true },
-                    },
+                include: {
+                    employee: true,
                 },
             },
             financialData: true,
@@ -43,9 +49,29 @@ export default async function ProgramDetails({ params }: { params: { id: string 
         <Layout title={`${program.name} | Program Analyst`}>
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-3xl font-bold">{program.name}</h1>
-                <Button asChild>
-                    <Link href={`/programs/${program.id}/manage`}>Manage Program</Link>
-                </Button>
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button variant="outline">
+                            Manage Program <ChevronDown className="ml-2 h-4 w-4" />
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                        <DropdownMenuLabel>Program Management</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem asChild>
+                            <Link href={`/programs/${program.id}/manage`}>Full Management Dashboard</Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                            <Link href={`/programs/${program.id}/employees/new`}>Add New Employee</Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                            <Link href={`/programs/${program.id}/projects/new`}>Add New Project</Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                            <Link href={`/programs/${program.id}/contracts/new`}>Add New Contract</Link>
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Card>
@@ -110,8 +136,8 @@ export default async function ProgramDetails({ params }: { params: { id: string 
                             <TableBody>
                                 {program.personnel.map((person) => (
                                     <TableRow key={person.id}>
-                                        <TableCell>{person.employee.name}</TableCell>
-                                        <TableCell>{person.employee.position}</TableCell>
+                                        <TableCell>{person.employee?.name || "N/A"}</TableCell>
+                                        <TableCell>{person.role}</TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
@@ -119,32 +145,9 @@ export default async function ProgramDetails({ params }: { params: { id: string 
                     </CardContent>
                 </Card>
 
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Financial Data</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <Table>
-                            <TableHeader>
-                                <TableRow>
-                                    <TableHead>Type</TableHead>
-                                    <TableHead>Amount</TableHead>
-                                    <TableHead>Date</TableHead>
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                                {program.financialData.map((data) => (
-                                    <TableRow key={data.id}>
-                                        <TableCell>{data.type}</TableCell>
-                                        <TableCell>${data.amount.toLocaleString()}</TableCell>
-                                        <TableCell>{data.date.toLocaleDateString()}</TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </CardContent>
-                </Card>
+                <FinancialDataManagement programId={program.id} />
             </div>
+            <ProgramAnalyticsDashboard programId={program.id} />
         </Layout>
     )
 }
